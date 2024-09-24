@@ -100,7 +100,7 @@ class pediatorrent(object):
                                 download_link = a
                                 item['link'] = self.url + download_link[1:]
                                 item['size'] = -1
-                                item['name'] = name
+                                item['name'] = name + td_link[0]
                                 prettyPrinter(item)
                             except Exception:
                                 continue
