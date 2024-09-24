@@ -53,26 +53,14 @@ class pediatorrent(object):
         search_url = f"{self.url}buscar?q={what.replace('+','%20')}"
         html = retrieve_url(search_url)
 
-        """
-        Para saber si ha encontrado torrents, en dontorrent te muestra un mensaje con la cantidad de torrents encontrados
-        Si no encuentra nada, la cantidad de torrents es 0
-        """
         quantity = re.findall(r'<p.*?class="text-2xl text-lime-500 text-center.*?</p>', html)
         coincidencias = re.findall(r'\d+', quantity[0])
         
         quantity = int(coincidencias[2])
-        """
-        En la paginación tiene dos botones que son para ir a la pagina anterior y a la siguiente
-        Por ello uso pages[1:-1] para quitar esos dos botones
-        """
         pages = quantity // 17 + 1
         
         links = []
 
-        """
-        Las páginas tienen la siguiente estructura: url/buscar/what/page/[0-pages]
-        Por ejemplo: https://dontorrent.cologne/buscar/star%20wars/page/1
-        """
         for i in range(1, pages + 1):
             url = f"{self.url}buscar/page/{i}?q={what.replace('+','%20')}"
             html = retrieve_url(url)
