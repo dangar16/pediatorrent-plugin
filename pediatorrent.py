@@ -72,37 +72,36 @@ class pediatorrent(object):
                     links.append(url[0])
 
         for i in links:
-            if i.split("/")[-1].replace("-", " ") not in ["dmca", "ayuda", "documentales", "peliculas", f"buscar?q={what}", f"1?q={what.replace('+','%20')}"]:
-                try: 
-                    html = retrieve_url(i)
-                    item = {}
-                    item['seeds'] = '-1'
-                    item['leech'] = '-1'
-                    item['engine_url'] = self.url
-                    item['desc_link'] = i
-                    item['name'] = i.split("/")[-1].replace("-", " ")
-                    name=i.split("/")[-1].replace("-", " ")
-                    tipo = i.split("/")[3]
-                    if tipo != "series":
-                        a = re.findall(r'<a.*?>', html)
-                        a = a[11:12]
-                        url = re.findall(r'href=[\'"]?([^\'" >]+)', a[0])[0]
-                        item['link'] = self.url + url[1:]
-                        item['size'] = -1
-                        prettyPrinter(item)
-                    else:
-                        tds = re.findall(r'<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium ml-auto">(.*?)</td>', html, re.M|re.I|re.S)
-                        for td in tds:
-                            td_link = re.findall(r'href=[\'"]?([^\'" >]+)', td, re.DOTALL)
-                            a = td_link[0]
+            try: 
+                html = retrieve_url(i)
+                item = {}
+                item['seeds'] = '-1'
+                item['leech'] = '-1'
+                item['engine_url'] = self.url
+                item['desc_link'] = i
+                item['name'] = i.split("/")[-1].replace("-", " ")
+                name=i.split("/")[-1].replace("-", " ")
+                tipo = i.split("/")[3]
+                if tipo != "series":
+                    a = re.findall(r'<a.*?>', html)
+                    a = a[11:12]
+                    url = re.findall(r'href=[\'"]?([^\'" >]+)', a[0])[0]
+                    item['link'] = self.url + url[1:]
+                    item['size'] = -1
+                    prettyPrinter(item)
+                else:
+                    tds = re.findall(r'<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium ml-auto">(.*?)</td>', html, re.M|re.I|re.S)
+                    for td in tds:
+                        td_link = re.findall(r'href=[\'"]?([^\'" >]+)', td, re.DOTALL)
+                        a = td_link[0]
 
-                            try:
-                                download_link = a
-                                item['link'] = self.url + download_link[1:]
-                                item['size'] = -1
-                                item['name'] = name + td_link[0]
-                                prettyPrinter(item)
-                            except Exception:
-                                continue
-                except Exception:
-                    continue
+                        try:
+                            download_link = a
+                            item['link'] = self.url + download_link[1:]
+                            item['size'] = -1
+                            item['name'] = name + td_link[0]
+                            prettyPrinter(item)
+                        except Exception:
+                            continue
+            except Exception:
+                continue
