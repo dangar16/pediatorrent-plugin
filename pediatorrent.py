@@ -79,8 +79,7 @@ class pediatorrent(object):
                     item['leech'] = '-1'
                     item['engine_url'] = self.url
                     item['desc_link'] = i
-                    item['name'] = i.split("/")[-1].replace("-", " ")
-                    name=i.split("/")[-1].replace("-", " ")
+                    item['name'] = name = " ".join(i.split("/")[-1].split("-")[1:])
                     tipo = i.split("/")[3]
                     if tipo != "series":
                         a = re.findall(r'<a.*?>', html)
