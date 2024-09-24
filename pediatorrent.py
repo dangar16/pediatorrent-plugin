@@ -36,23 +36,7 @@ class pediatorrent(object):
         implementation in case the search engine in question does not allow
         traditional downloads (for example, cookie-based download).
         """
-        
-        """
-        Esto es paja
-        try:
-            file, url = download_file(url).split(" ")
-            torrent = open(file, 'rb').read()
-            metadata = bencode.bdecode(torrent)
-            hashcontents = bencode.bencode(metadata['info'])
-            digest = hashlib.sha1(hashcontents).digest()
-            b32hash = base64.b32encode(digest)
-        except Exception as e:
-            return ""
-
-        return "magnet:?xt=urn:btih:" + str(b32hash)[2:-1]
-        """
-        return download_file(url)
-        
+        print(download_file(url))        
 
     # DO NOT CHANGE the name and parameters of this function
     # This function will be the one called by nova2.py
