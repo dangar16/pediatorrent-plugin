@@ -36,7 +36,7 @@ class pediatorrent(object):
         implementation in case the search engine in question does not allow
         traditional downloads (for example, cookie-based download).
         """
-        print(download_file(url))        
+        print(download_file(url))
 
     # DO NOT CHANGE the name and parameters of this function
     # This function will be the one called by nova2.py
@@ -97,7 +97,7 @@ class pediatorrent(object):
                     a = re.findall(r'<a.*?>', html)
                     a = a[11:12]
                     url = re.findall(r'href=[\'"]?([^\'" >]+)', a[0])[0]
-                    item['link'] = url
+                    item['link'] = self.url + url[1:]
                     item['size'] = -1
                     prettyPrinter(item)
                 else:
@@ -108,7 +108,7 @@ class pediatorrent(object):
 
                         try:
                             download_link = a
-                            item['link'] = download_link
+                            item['link'] = self.url + download_link[1:]
                             item['size'] = -1
                             item['name'] = name + " " + td_link[0]
                             prettyPrinter(item)
