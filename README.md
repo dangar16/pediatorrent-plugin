@@ -3,7 +3,7 @@ dontorrent search plugin for qbittorrent
 
 # Installation
 
-First copy the raw [link](https://raw.githubusercontent.com/dangar16/dontorrent-plugin/main/dontorrent.py) and follow the next steps:
+First copy the raw [link](https://raw.githubusercontent.com/dangar16/pediatorrent-plugin/refs/heads/main/pediatorrent.py) and follow the next steps:
 
 1- Enable search engine
 ![image](https://github.com/dangar16/dontorrent-plugin/assets/95357264/d0a2cb24-7ce4-44a0-b0f0-a642fe01e02e)
