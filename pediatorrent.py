@@ -65,7 +65,6 @@ class pediatorrent(object):
             url = f"{self.url}buscar/page/{i}?q={what.replace('+','%20')}"
             html = retrieve_url(url)
             a_list = re.findall(r'<a.*?>', html)
-            a_list = a_list[len(a_list) - quantity:-2]
             for a in a_list:
                 url = re.findall(r'href=[\'"]?([^\'" >]+)', a)
                 if len(url) > 0:
